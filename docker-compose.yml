@@ -1,0 +1,52 @@
+version: '2'
+services:
+    mongodb:
+        image: mongo:latest
+        container_name: "mongodb-lab"
+        environment:
+          - MONGO_DATA_DIR=/data/db
+          - MONGO_LOG_DIR=/dev/null
+        volumes:
+          - ./data/db:/data/db
+        ports:
+            - 27017:27017
+        expose:
+            - 27017
+        command: mongod --smallfiles --logpath=/dev/null # --quiet
+    provider_manager:
+        build:  ./provider_manager
+        links:
+            - mongodb:mongodb
+        volumes:
+            - ./provider_manager/app/src:/app/src
+        ports:
+            - 3000:80
+        expose:
+            - 80
+    api:
+        build:  ./api
+        links:
+            - mongodb:mongodb
+        volumes:
+            - ./api/app/src:/app/src
+        ports:
+            - 3001:80
+        expose:
+            - 80
+        environment:
+            - DB_MANAGER_URL=${DB_MANAGER_URL}
+            - PROVIDER_MANAGER_URL=${PROVIDER_MANAGER_URL}
+    db_manager:
+        build:  ./db_manager
+        links:
+            - mongodb:mongodb
+        volumes:
+            - ./db_manager/app/src:/app/src
+        ports:
+            - 3002:80
+        expose:
+            - 80
+        environment:
+            - MONGODB_CONNECTION_STRING=${MONGODB_CONNECTION_STRING}
+    
+    
