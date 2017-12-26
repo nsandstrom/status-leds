@@ -9,8 +9,10 @@ var express = require('express'),
 	Led = require('./models/ledModel'),
 	bodyParser = require('body-parser');
 
+const connection_string = process.env.MONGODB_CONNECTION_STRING
+
 mongoose.Promise = global.Promise
-mongoose.connect('mongodb://mongodb/ledtasks', {useMongoClient: true})
+mongoose.connect(connection_string, {useMongoClient: true})
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
