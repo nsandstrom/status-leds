@@ -4,7 +4,7 @@
 
 var express = require('express'),
 	app = express(),
-	port = process.env.PORT || 3002,
+	port = process.env.PORT || 80,
 	mongoose = require('mongoose'),
 	Led = require('./models/ledModel'),
 	bodyParser = require('body-parser');
