@@ -24,6 +24,22 @@ var LedSchema = new Schema({
 	interval: {
 		type: Number,
 		required: 'Interval required'
+	},
+	properties: {
+		color: {
+			red: {
+				type: Number,
+				default: 0
+			},
+			green: {
+				type: Number,
+				default: 0
+			},
+			blue: {
+				type: Number,
+				default: 0
+			}
+		}
 	}
 
 });
