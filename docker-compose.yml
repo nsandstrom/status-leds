@@ -1,4 +1,4 @@
-version: '2'
+version: '3.1'
 services:
     mongodb:
         image: mongo:latest
@@ -48,5 +48,21 @@ services:
             - 80
         environment:
             - MONGODB_CONNECTION_STRING=${MONGODB_CONNECTION_STRING}
-    
-    
+    rabbitmq:
+        image: "rabbitmq:3-management"
+        environment:
+            RABBITMQ_DEFAULT_USER_FILE: /run/secrets/rabbitmq_user
+            RABBITMQ_DEFAULT_PASS_FILE: /run/secrets/rabbitmq_password
+        ports:
+            - 15672:15672
+            - 5672:5672
+        expose:
+            - 5672
+        secrets:
+            - rabbitmq_user
+            - rabbitmq_password
+secrets:
+    rabbitmq_password:
+        file: secrets/rabbitmq_password.txt
+    rabbitmq_user:
+        file: secrets/rabbitmq_user.txt
