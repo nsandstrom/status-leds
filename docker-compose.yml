@@ -47,7 +47,14 @@ services:
         expose:
             - 80
         environment:
-            - MONGODB_CONNECTION_STRING=${MONGODB_CONNECTION_STRING}
+            MONGODB_CONNECTION_STRING: ${MONGODB_CONNECTION_STRING}
+            DB_MANAGER_QUEUE: ${DB_MANAGER_QUEUE}
+            AMQP_BROKER_HOSTNAME: ${AMQP_BROKER_HOSTNAME}
+            AMQP_BROKER_USER_FILE: /run/secrets/rabbitmq_user
+            AMQP_BROKER_PASSWORD_FILE: /run/secrets/rabbitmq_password
+        secrets:
+            - rabbitmq_user
+            - rabbitmq_password
     rabbitmq:
         image: "rabbitmq:3-management"
         environment:
@@ -58,6 +65,8 @@ services:
             - 5672:5672
         expose:
             - 5672
+        logging:
+            driver: "none"
         secrets:
             - rabbitmq_user
             - rabbitmq_password
