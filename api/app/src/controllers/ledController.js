@@ -7,7 +7,7 @@ import Led from '../models/Led'
 
 exports.list_all = async function(req, res) {
 	try {
-		let leds = await Led.list_all();
+		let leds = await Led.get('leds');
 		res.json(leds)
 	} catch(err) {
 		console.log(err)
@@ -17,7 +17,7 @@ exports.list_all = async function(req, res) {
 
 exports.create_new = async function(req, res) {
 	try {
-		let new_led = await Led.create_new(req.body)
+		let new_led = await Led.post('leds', req.body)
 		res.json(new_led)
 	} catch(err) {
 		console.log(err)
@@ -27,7 +27,7 @@ exports.create_new = async function(req, res) {
 
 exports.show_one = async function(req, res) {
 	try {
-		let led = await Led.show_one(req.params.id);
+		let led = await Led.get('leds/' + req.params.id);
 		res.json(led)
 	} catch(err) {
 		console.log(err)
@@ -37,7 +37,7 @@ exports.show_one = async function(req, res) {
 
 exports.update_one = async function(req, res) {
 	try {		
-		let led = await Led.update_one(req.params.id, req.body)
+		let led = await Led.post('leds/' + req.params.id, req.body)
 		res.json(led)
 	} catch(err) {
 		console.log(err)

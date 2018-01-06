@@ -7,7 +7,8 @@ import Provider from '../models/Provider'
 
 exports.list_all = async function(req, res) {
 	try {
-		let conditions = await Provider.list_all_conditions(req.params.id);
+		let reqPath = 'providers/' + req.params.id + "/conditions"
+		let conditions = await Provider.get(reqPath);
 		res.json(conditions)
 	} catch(err) {
 		res.send(err)
@@ -16,7 +17,8 @@ exports.list_all = async function(req, res) {
 
 exports.show_one = async function(req, res) {
 	try {
-		let condition = await Provider.show_one_condition(req.params.id, req.params.condition_id);
+		let reqPath = 'providers/' + req.params.id + "/conditions/" + req.params.condition_id
+		let condition = await Provider.get(reqPath);
 		res.json(condition)
 	} catch(err) {
 		console.log(err)
