@@ -23,6 +23,15 @@ services:
             - 3000:80
         expose:
             - 80
+        environment:
+            PROVIDER_MANAGER_QUEUE: ${PROVIDER_MANAGER_QUEUE}
+            DB_MANAGER_QUEUE: ${DB_MANAGER_QUEUE}
+            AMQP_BROKER_HOSTNAME: ${AMQP_BROKER_HOSTNAME}
+            AMQP_BROKER_USER_FILE: /run/secrets/rabbitmq_user
+            AMQP_BROKER_PASSWORD_FILE: /run/secrets/rabbitmq_password
+        secrets:
+            - rabbitmq_user
+            - rabbitmq_password
     api:
         build:  ./api
         links:

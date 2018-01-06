@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@n_sandstrom/amqp-messenger": "0.0.*",
     "express": "^4.16.2"
   },
   "devDependencies": {
