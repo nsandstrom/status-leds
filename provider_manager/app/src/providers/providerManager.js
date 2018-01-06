@@ -3,6 +3,7 @@
 'use strict';
 
 import Provider from './'
+import Result from './result'
 
 export default class ProviderManager {
 
@@ -33,8 +34,9 @@ export default class ProviderManager {
 		return getProvider(provider).showCondition(condition)
 	}
 
-	static evaluate_condition(provider, condition, config){
-		return getProvider(provider).getCondition(condition).evaluate(config);
+	static evaluate_condition(provider, condition, led_id, config){
+		let res = new Result(led_id);
+		getProvider(provider).getCondition(condition).evaluate(config, res);
 	}
 
 	static verify(word){

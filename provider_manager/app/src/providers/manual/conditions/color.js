@@ -1,5 +1,7 @@
 // properties  [rgb]
 
+var messenger = require('@n_sandstrom/amqp-messenger')
+
 export default class Color {
 	static properties(){
 		return { "color": { "type": "rgb"}}
@@ -9,24 +11,21 @@ export default class Color {
 		return { "targetColor": { "type": "rgb"} }
 	}
 
-	static evaluate(config){
+	static evaluate(config, result){
 		let color = config.targetColor.value
 		let red = color.red
 		let green = color.green
 		let blue = color.blue
-		return 	{
+		let evaluated = {
 			"properties": {
 				"color": {
-					"type": "rgb",
-					"value": {
-						"red": red,
-						"green": green,
-						"blue": blue
-					}
+					"red": red || 0,
+					"green": green || 0,
+					"blue": blue || 0
 				}
-			},
-			"status": "OK"
+			}
 		}
+		result.send(evaluated)
 	}
 }
 
@@ -35,6 +34,11 @@ export default class Color {
 	"config": 
 	{
 		"targetColor": { "type": "rgb", "value": {"red": 255, "green": 0, "blue": 0	}  }
+	}
+
+	"properties":
+	{
+		"color": { "red": 255, "green": 0, "blue":0 }
 	}
 }
 */

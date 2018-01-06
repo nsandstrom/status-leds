@@ -23,11 +23,10 @@ exports.show_one = async function(req, res) {
 
 exports.evaluate = async function(req, res) {
 	try {
-		res.json(Providers.evaluate_condition(req.params.id, req.params.condition_id, req.body.config))
+		Providers.evaluate_condition(req.params.id, req.params.condition_id, req.body.id, req.body.config)
+		if(res) res.json("Order received")
 	} catch(err) {
 		console.log("Error " + err)
 		res.send(err)
 	}
 }
-
-//private
