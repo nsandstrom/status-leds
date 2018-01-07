@@ -19,26 +19,19 @@ exports.list_all = async function(req, res) {
 exports.create_new = async function(req, res) {
 	try {
 		console.log(req.body)
-		// let parsed_urls = parse_urls(req.body.url)
-		let response = {}
-
-		// if (parsed_urls.accepted.length == 0)
-		// 	throw(response)
-
-		// let orders = build_order(parsed_urls.accepted);
 
 		let led = new Led(req.body);
 		let save_status = await led.save()
-		response.accepted = save_status
 		res.json(save_status)
 	} catch(err) {
-		console.log(err)
-		res.send(err);
+		let errorMsg = err.message || "DB Create Error"
+		console.log(errorMsg)
+		res.send(errorMsg);
 	}
 }
 
 exports.show_one = async function(req, res) {
-	try {		
+	try {
 		let led = await Led.findOne({id: req.params.id})
 		res.json(led)
 	} catch(err) {
@@ -48,9 +41,26 @@ exports.show_one = async function(req, res) {
 }
 
 exports.update_one = async function(req, res) {
-	try {		
+	try {
 		let led = await Led.findOneAndUpdate({id: req.params.id}, req.body, {new: true})
 		res.json(led)
+	} catch(err) {
+		console.log(err)
+		res.send(err)
+	}
+}
+
+exports.pending = async function(req, res) {
+	try {
+		let minute = parseInt(req.params.minute)
+		if (minute == NaN) minute = 1
+		console.log("check time at minute %s", minute)
+		let leds = await Led.aggregate([
+			{ $project: {  _id: 0, id: 1, interval:1, remainder: { $mod: [ minute, "$interval" ] } }  },
+			{ $match : {remainder:0} },
+			{ $project: {   id: 1, interval: 1 } }
+		])
+		res.json(leds)
 	} catch(err) {
 		console.log(err)
 		res.send(err)

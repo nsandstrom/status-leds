@@ -9,6 +9,10 @@ var LedSchema = new Schema({
 		type: Number,
 		required: 'Id must be provided'
 	},
+	location: {
+		type: String,
+		default: ""
+	},
 	provider: {
 		type: String,
 		required: 'Provider must be provided'
@@ -40,8 +44,8 @@ var LedSchema = new Schema({
 				default: 0
 			}
 		}
-	}
-
+	},
+	updated: Date
 });
 
 LedSchema.index({ "id": 1}, { "name": "uni_id_", "unique": true })

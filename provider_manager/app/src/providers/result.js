@@ -12,7 +12,8 @@ export default class Result {
 	send(result){
 		messenger.post(db_queue, basePath + this.id, result).then(function(message) {
 			if(message.content){
-				console.log("Received reply from DB");
+				let body = JSON.parse(message.content)
+				console.log("Received reply from DB, id %s", body.id);
 				messenger.ack(message);
 			}
 		}).catch(console.warn);

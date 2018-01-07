@@ -15,4 +15,7 @@ ledRoutes.route(':id')
 	.get(led.show_one)
 	.post(led.update_one)
 
+ledRoutes.route('pending/:minute')
+	.get(led.pending)
+
 module.exports = ledRoutes
