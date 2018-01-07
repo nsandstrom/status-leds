@@ -72,6 +72,19 @@ services:
         secrets:
             - rabbitmq_user
             - rabbitmq_password
+    scheduler:
+        build:  ./scheduler
+        volumes:
+            - ./scheduler/app/src:/app/src
+        environment:
+            PROVIDER_MANAGER_QUEUE: ${PROVIDER_MANAGER_QUEUE}
+            DB_MANAGER_QUEUE: ${DB_MANAGER_QUEUE}
+            AMQP_BROKER_HOSTNAME: ${AMQP_BROKER_HOSTNAME}
+            AMQP_BROKER_USER_FILE: /run/secrets/rabbitmq_user
+            AMQP_BROKER_PASSWORD_FILE: /run/secrets/rabbitmq_password
+        secrets:
+            - rabbitmq_user
+            - rabbitmq_password
     rabbitmq:
         image: "rabbitmq:3-management"
         environment:
