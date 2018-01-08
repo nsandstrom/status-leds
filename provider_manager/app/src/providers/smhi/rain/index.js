@@ -15,9 +15,18 @@ export default class Rain {
 
 	static evaluate(config, result){
 		try {
-			SMHIHelper.apiRequest(config.location.value).then(function(response){
 
-				let forecasts = SMHIHelper.parseHours(response, 12)
+			let hours
+			if(config.hours) {
+				hours = config.hours.value || 12
+			}
+			else {
+				hours = 12
+			}
+
+			SMHIHelper.getForecast(config.location.value).then(function(response){
+
+				let forecasts = SMHIHelper.parseHours(response, 0, hours)
 				let pmin_sum = 0
 				let pmax_sum = 0
 				let pavg_sum = 0.0
@@ -31,6 +40,7 @@ export default class Rain {
 					let pavg = (SMHIHelper.findParam(forecast, "pmin") + SMHIHelper.findParam(forecast, "pmax")) / 2
 					pavg_sum += pavg
 
+					// console.log(new Date(forecast.validTime))
 					// console.log(pmin)
 					// console.log(SMHIHelper.findParam(forecast, "pmax"))
 					// console.log(pavg)

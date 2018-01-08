@@ -4,20 +4,26 @@
 
 import ApiCall from '../../ApiCall'
 
-var base_url = "https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point"
+var forecast_url = "https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point"
+var history_url = "https://opendata-download-metanalys.smhi.se/api/category/mesan1g/version/2/geotype/point"
 
 export default class SMHIHelper{
 
-	static apiRequest(location){
-		var url = base_url + "/lon/" + location.long + "/lat/" + location.lat + "/data.json"
+	static getForecast(location){
+		var url = forecast_url + "/lon/" + location.long + "/lat/" + location.lat + "/data.json"
+		return ApiCall.get(url);
+	}
+	static getHistory(location){
+		var url = history_url + "/lon/" + location.long + "/lat/" + location.lat + "/data.json"
 		return ApiCall.get(url);
 	}
 
-	static parseHours(data, hours){
-		let now = new Date
+	static parseHours(data, startOffset, endOffset){
+		let start_date = new Date
 		let cutof_date = new Date
-		cutof_date.setHours(cutof_date.getHours() + hours)
-		let forecasts = data.timeSeries.filter(SMHIHelper.is_within(now, cutof_date))
+		start_date.setHours(cutof_date.getHours() + startOffset)
+		cutof_date.setHours(cutof_date.getHours() + endOffset)
+		let forecasts = data.timeSeries.filter(SMHIHelper.is_within(start_date, cutof_date))
 		return forecasts
 	}
 
