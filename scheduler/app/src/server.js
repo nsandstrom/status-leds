@@ -13,11 +13,10 @@ const amqp_user = fs.readFileSync(process.env.AMQP_BROKER_USER_FILE, 'utf8').tri
 const amqp_password = fs.readFileSync(process.env.AMQP_BROKER_PASSWORD_FILE, 'utf8').trim()
 
 let amqpHostname = "amqp://" + amqp_user + ":" + amqp_password + "@" + amqp_host
-setTimeout(function(){
-	messenger.connect(amqpHostname).then(function() {
-		let scheduler = new Scheduler()
-		scheduler.start()
-	}).catch(console.warn);
-}, 5000);
+
+messenger.connect(amqpHostname).then(function() {
+	let scheduler = new Scheduler()
+	scheduler.start()
+}).catch(console.warn);
 
 console.log('Scheduler started');

@@ -33,13 +33,12 @@ const amqp_password = fs.readFileSync(process.env.AMQP_BROKER_PASSWORD_FILE, 'ut
 let amqpHostname = "amqp://" + amqp_user + ":" + amqp_password + "@" + amqp_host
 var amqpRoutes = require('./routes-amqp')
 messenger.use(amqpRoutes)
-setTimeout(function(){
-	messenger.connect(amqpHostname).then(function() {
-		messenger.initQueue(listen_queue, {durable: true}).then(function(q) {
-			messenger.listen(listen_queue)
-		});
-	}).catch(console.warn);
-	console.log(messenger.router.toString())
 
-	console.log('Provider manager started on port: %s and queue: %s', port, listen_queue);
-}, 5000);
+messenger.connect(amqpHostname).then(function() {
+	messenger.initQueue(listen_queue, {durable: true}).then(function(q) {
+		messenger.listen(listen_queue)
+	});
+}).catch(console.warn);
+console.log(messenger.router.toString())
+
+console.log('Provider manager started on port: %s and queue: %s', port, listen_queue);
