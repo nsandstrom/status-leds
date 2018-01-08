@@ -2,7 +2,7 @@
 
 'use strict';
 
-import SMHIHelper from './SMHIHelper'
+import SMHIHelper from './../SMHIHelper'
 
 export default class Rain {
 	static properties(){

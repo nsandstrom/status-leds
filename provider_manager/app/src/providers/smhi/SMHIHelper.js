@@ -2,7 +2,7 @@
 
 'use strict';
 
-import ApiCall from '../../../ApiCall'
+import ApiCall from '../../ApiCall'
 
 var base_url = "https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point"
 

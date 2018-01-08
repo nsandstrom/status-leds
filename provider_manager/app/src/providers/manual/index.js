@@ -2,8 +2,11 @@
 
 'use strict';
 
-import Conditions from './conditions'
 import Provider from '../BaseProvider.js'
+import importer from '../importer.js'
+
+let Conditions = importer(__dirname, '*/index.js')
+
 
 export default class Manual extends Provider{
 	

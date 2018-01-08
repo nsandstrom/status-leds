@@ -2,12 +2,11 @@
 
 'use strict';
 
-import Smhi from './smhi/'
-import Sl from './sl/'
-import Manual from './manual/'
+var glob = require( 'glob' )
+  , path = require( 'path' );
 
-export default {	"Smhi" : Smhi,
-					"Sl" : Sl,
-					"Manual" : Manual }
-// module.exports.Modules = [Smhi, Sl]
-// module.exports.Sl = Sl
+import importer from './importer.js'
+
+let providers = importer(__dirname, '*/index.js')
+
+export default providers
