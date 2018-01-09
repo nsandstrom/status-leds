@@ -1,21 +1,5 @@
 'use strict';
 
-var glob = require( 'glob' )
-  , path = require( 'path' );
+import importer from './../importer.js'
 
-export default function importer(targetPath, importPath) {
-
-	let items = {}
-
-	glob.sync( path.resolve(targetPath, importPath) ).forEach( function( file ) {
-		try {
-			let splitPath = file.split('/')
-			let dir = splitPath[splitPath.length-2]
-			let name = dir.charAt(0).toUpperCase() + dir.slice(1);
-			items[name] = require( path.resolve( file ) ).default
-		} catch(error) {
-			console.log(error)
-		}
-	});
-	return items
-}
+export default importer
