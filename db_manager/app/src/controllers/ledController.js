@@ -42,7 +42,7 @@ exports.show_one = async function(req, res) {
 
 exports.update_one = async function(req, res) {
 	try {
-		let led = await Led.findOneAndUpdate({id: req.params.id}, req.body, {new: true})
+		let led = await Led.findOneAndUpdate({id: req.params.id}, req.body, {new: true, runValidators: true})
 		res.json(led)
 	} catch(err) {
 		console.log(err)

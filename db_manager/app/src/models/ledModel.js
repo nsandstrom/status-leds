@@ -33,15 +33,21 @@ var LedSchema = new Schema({
 		color: {
 			red: {
 				type: Number,
-				default: 0
+				default: 0,
+				min: 0,
+				max: [255, "to high"]
 			},
 			green: {
 				type: Number,
-				default: 0
+				default: 0,
+				min: 0,
+				max: 255
 			},
 			blue: {
 				type: Number,
-				default: 0
+				default: 0,
+				min: 0,
+				max: 255
 			}
 		}
 	},
