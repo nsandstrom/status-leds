@@ -52,6 +52,7 @@ exports.show_one_color = async function(req, res) {
 		res.json(ledColor)
 	} catch(err) {
 		console.log(err)
-		res.send(err)
+		res.statusCode = (500)
+		res.send("error")
 	}
 };
