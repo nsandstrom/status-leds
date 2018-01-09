@@ -44,3 +44,14 @@ exports.update_one = async function(req, res) {
 		res.send(err)
 	}
 };
+
+exports.show_one_color = async function(req, res) {
+	try {
+		let led = await Led.get('leds/' + req.params.id);
+		let ledColor = led.properties.color
+		res.json(ledColor)
+	} catch(err) {
+		console.log(err)
+		res.send(err)
+	}
+};

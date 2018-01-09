@@ -16,5 +16,8 @@ ledRoutes.route('/:id')
 	.get(led.show_one)
 	.post(led.update_one)
 
+ledRoutes.route('/:id/color')
+	.get(led.show_one_color)
+
 
 module.exports = ledRoutes
