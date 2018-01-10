@@ -6,8 +6,8 @@ export default class Deviations {
 		return { "color": { "type": "rgb"}}
 	}
 
-	static configuration(){
-		return {"station": {type: "string"}, "traffic": {type: "string"} }
+	static config(){
+		return {"station": {type: "text"}, "traffic": {type: "text"} }
 	}
 
 	static evaluate(config){

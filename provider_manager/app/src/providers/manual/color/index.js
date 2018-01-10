@@ -7,7 +7,7 @@ export default class Color {
 		return { "color": { "type": "rgb"}}
 	}
 
-	static configuration(){
+	static config(){
 		return { "targetColor": { "type": "rgb"} }
 	}
 

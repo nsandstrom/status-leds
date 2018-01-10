@@ -33,7 +33,7 @@ export default class Provider{
 		let list = {}
 		list["name"] = condition.name
 		list["properties"] = condition.properties()
-		list["configuration"] = condition.configuration()
+		list["config"] = condition.config()
 		return list
 	}
 	

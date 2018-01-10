@@ -12,7 +12,7 @@ export default class Temperature {
 		return { "color": { "type": "rgb"}}
 	}
 
-	static configuration(){
+	static config(){
 		return {"location": {type: "location"}}
 	}
 
