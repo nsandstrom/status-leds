@@ -9,7 +9,7 @@ var LedSchema = new Schema({
 		type: Number,
 		required: 'Id must be provided'
 	},
-	location: {
+	label: {
 		type: String,
 		default: ""
 	},
