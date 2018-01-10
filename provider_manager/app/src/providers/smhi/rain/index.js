@@ -10,7 +10,7 @@ export default class Rain {
 	}
 
 	static config(){
-		return {"location": {type: "location"}}
+		return {"location": {type: "location"}, "hours": {type: "number"} }
 	}
 
 	static evaluate(config, result){
@@ -18,7 +18,7 @@ export default class Rain {
 
 			let hours
 			if(config.hours) {
-				hours = config.hours.value || 12
+				hours = parseInt(config.hours.value._number) || 12
 			}
 			else {
 				hours = 12
@@ -50,7 +50,8 @@ export default class Rain {
 				// console.log("highest min: %s", pmin_max)
 				// console.log("total min: %s", pmin_sum)
 				// console.log("total max: %s", pmax_sum)
-				// console.log("total avg: %s", pavg_sum/12)
+				// console.log("total avg: %s", pavg_sum/forecasts.length)
+				// console.log("total count: %s", forecasts.length)
 
 				let red = 0
 				let green = 0

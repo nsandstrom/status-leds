@@ -23,7 +23,7 @@ export default class Temperature {
 
 			let hours
 			if(config.hours) {
-				hours = config.hours.value || 10
+				hours = parseInt(config.hours.value._number) || 10
 			}
 			else {
 				hours = 10
