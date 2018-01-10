@@ -45,6 +45,16 @@ exports.update_one = async function(req, res) {
 	}
 };
 
+exports.delete_one = async function(req, res) {
+	try {
+		let led = await Led.send('leds/' + req.params.id + "/delete", req.body)
+		res.json(led)
+	} catch(err) {
+		console.log(err)
+		res.send(err)
+	}
+};
+
 exports.show_one_color = async function(req, res) {
 	try {
 		let led = await Led.get('leds/' + req.params.id);

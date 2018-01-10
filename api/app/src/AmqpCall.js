@@ -33,4 +33,15 @@ export default class AmqpCall {
 			});
 		});
 	}
+
+	static send(queue, reqPath, data){
+		return new Promise((resolve, reject) => {
+			messenger.send(queue, reqPath, data).then(function(message) {
+				resolve(true)
+				return 0
+			}).catch(function(error){
+				reject(error)
+			});
+		});
+	}
 }

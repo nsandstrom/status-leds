@@ -15,6 +15,7 @@ ledRoutes.route('/')
 ledRoutes.route('/:id')
 	.get(led.show_one)
 	.post(led.update_one)
+	.delete(led.delete_one)
 
 ledRoutes.route('/:id/color')
 	.get(led.show_one_color)

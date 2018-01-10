@@ -15,4 +15,8 @@ export default class Led {
 	static post(reqPath, data){
 		return AmqpCall.post(queue, reqPath, data)
 	}
+
+	static send(reqPath, data){
+		return AmqpCall.send(queue, reqPath, data)
+	}
 }

@@ -50,6 +50,15 @@ exports.update_one = async function(req, res) {
 	}
 }
 
+exports.delete_one = async function(req) {
+	try {
+		Led.find({ id:req.params.id }).remove().exec()
+	} catch(err) {
+		console.log(err)
+		res.send(err)
+	}
+}
+
 exports.pending = async function(req, res) {
 	try {
 		let minute = parseInt(req.params.minute)

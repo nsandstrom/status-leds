@@ -15,6 +15,9 @@ ledRoutes.route(':id')
 	.get(led.show_one)
 	.post(led.update_one)
 
+ledRoutes.route(':id/delete')
+	.pub(led.delete_one)
+
 ledRoutes.route('pending/:minute')
 	.get(led.pending)
 

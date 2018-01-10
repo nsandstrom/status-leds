@@ -15,6 +15,7 @@ global.PROVIDER_MANAGER_URL = process.env.PROVIDER_MANAGER_URL;
 // Initiate http api
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
