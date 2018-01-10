@@ -3,3 +3,6 @@
 
 /data
 /secrets
+
+/webapp/app/babel_cache
+/webapp/app/src/static/js
