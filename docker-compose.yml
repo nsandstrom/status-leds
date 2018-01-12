@@ -29,9 +29,11 @@ services:
             AMQP_BROKER_HOSTNAME: ${AMQP_BROKER_HOSTNAME}
             AMQP_BROKER_USER_FILE: /run/secrets/rabbitmq_user
             AMQP_BROKER_PASSWORD_FILE: /run/secrets/rabbitmq_password
+            SL_API_KEY_FILE: /run/secrets/sl_api_key
         secrets:
             - rabbitmq_user
             - rabbitmq_password
+            - sl_api_key
     api:
         build:  ./api
         links:
@@ -109,3 +111,5 @@ secrets:
         file: secrets/rabbitmq_password.txt
     rabbitmq_user:
         file: secrets/rabbitmq_user.txt
+    sl_api_key:
+        file: secrets/sl_api_key.txt
